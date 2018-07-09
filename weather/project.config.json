@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.98",
 	"appid": "wxf1384c46e4005021",
-	"projectname": "weather",
+	"projectname": "my_weather",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

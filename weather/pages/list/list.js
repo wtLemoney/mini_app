@@ -35,6 +35,7 @@ Page({
       }
     })
   },
+  
   setWeekWeather(result){
     let weekWeather = [];
     for(let i=0;i<7;i++){
@@ -53,4 +54,5 @@ Page({
       weekWeather
     })
   }
+
 })

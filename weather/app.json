@@ -8,6 +8,6 @@
     "navigationBarBackgroundColor": "#cbeefd",
     "navigationBarTitleText": "柠檬个天气",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": true 
   }
 }

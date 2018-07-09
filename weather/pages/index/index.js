@@ -25,7 +25,7 @@ const AUTHORIZED = 2 //同意 authorized
 // const UNAUTHORIZED_TIPS = "点击开启位置权限"
 // const AUTHORIZED_TIPS = "" 
 
-Page({
+Page({ // 小程序刚刚启动时，会调用启动页面的 onLoad() 函数。
 
   data: {
     nowTemp: '14°',
@@ -39,11 +39,11 @@ Page({
   },
 
   onLoad() {// onLoad() 函数会在页面启动时被执行，监听页面加载
-    console.log('onLoad');
+    // console.log('onLoad');
     this.qqmapsdk = new QQMapWX({
       key: 'OSQBZ-6I3KG-BU2QV-I7SZI-CGQ2J-UCFBL',
     });
-    wx.getSetting({
+    wx.getSetting({// 获取了当前位置权限
       success: res=>{
         let auth = res.authSetting['scope.userLocation'];
         this.setData({
@@ -60,7 +60,7 @@ Page({
   },
 
   onPullDownRefresh() {//下拉刷新
-    this.getNow(() => wx.stopPullDownRefresh())
+    this.getNow(() => wx.stopPullDownRefresh()) // 
   },
 
   
@@ -93,8 +93,9 @@ Page({
           'content-type': 'application/json' // 默认值
         },
         success: res=>{
-          console.log(res);
+          // console.log(res);
           let result = res.data.result;
+          console.log(result);
           this.setNow(result);
         
           //设置forecast
@@ -120,13 +121,13 @@ Page({
       nowWeatherBackground: '/images/' + weather + '-bg.png'
     })
     wx.setNavigationBarColor({//设置导航栏背景
-      frontColor: '#000000',
+      frontColor: '#000000', // 前景颜色值，包括按钮、标题、状态栏的颜色，仅支持 #ffffff 和 #000000,必填
       backgroundColor: weatherColorMap[weather],
     })
   },
 
   setHourlyWeather(result){
-    console.log(result);
+    // console.log(result);
     let forecast = result.forecast;
     let nowHour = new Date().getHours();
     let hourlyWeather = [];
@@ -158,6 +159,7 @@ Page({
       url: '/pages/list/list?city='+this.data.city
     })
   },
+
 //点击获取位置
   onTapLocation(){
     if(this.data.locationAuthType === UNAUTHORIZED){//若点击开启位置权限，打开设置页面
@@ -197,8 +199,8 @@ Page({
             this.getNow();
           }
         });
-
       },
+
       fail: () => {
         this.setData({
           locationAuthType: UNAUTHORIZED, //1
