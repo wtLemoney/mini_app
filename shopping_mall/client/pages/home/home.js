@@ -1,50 +1,51 @@
  // pages/home/home.js
+const config = require('../../config.js')
+
+const qcloud = require('../../vendor/wafer2-client-sdk/index')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    productList: [{
-      id: 1,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product1.jpg',
-      name: '商品1',
-      price: 100,
-      source: '国内·广东',
-    }, {
-      id: 2,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product2.jpg',
-      name: '商品2',
-      price: 200,
-      source: '国内·广东',
-    }, {
-      id: 3,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product3.jpg',
-      name: '商品3',
-      price: 300,
-      source: '国内·广东',
-    }, {
-      id: 4,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product4.jpg',
-      name: '商品4',
-      price: 400,
-      source: '国内·广东',
-    }, {
-      id: 5,
-      image: 'https://s3.cn-north-1.amazonaws.com.cn/u-img/product5.jpg',
-      name: '商品5',
-      price: 500,
-      source: '国内·广东',
-    }], // 商品列表
+    productList: []// 商品列表
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getProductList();
+    console.log(config.service.productList)
   },
-
+  getProductList() {
+    wx.showLoading({
+      "title":"商品数据加载中..." // 在载入时显示的载入文字
+    })
+    qcloud.request({
+      url: 'https://qpq8syzq.qcloud.la/weapp/product', //或者  config.service.productList
+      success: result => {
+        wx.hideLoading();
+        console.log(result.data);
+        if(!result.data.code) {
+          this.setData({
+            productList: result.data.data
+          })
+        }else {
+          wx.showToast({
+            title: "商品数据加载失败"
+          })
+        }
+        
+      },
+      fail: result => {
+        wx.hideLoading();
+        wx.showToast({
+          title:"数据加载失败"
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
