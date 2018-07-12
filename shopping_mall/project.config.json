@@ -8,5 +8,32 @@
 	},
 	"appid": "wxf1384c46e4005021",
 	"projectname": "shopping_mall",
-	"condition": {}
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "detail页面",
+					"pathName": "pages/detail/detail",
+					"query": ""
+				}
+			]
+		}
+	}
 }

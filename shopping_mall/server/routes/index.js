@@ -35,6 +35,8 @@ router.post('/message', controllers.message.post)
 //新加2018.07.11,表示，我们对于结尾是 /product 的 get 请求，我们会使用刚刚定义在 controllers 中的 product 的 list 对应的功能。
 router.get('/product',controllers.product.list)
 
+router.get('/product/:id', controllers.product.detail)
+
 
 
 module.exports = router

@@ -25,7 +25,9 @@ var config = {
 
 
         //商品请求地址
-        productList: `${host}/weapp/product`
+        productList: `${host}/weapp/product`,
+        //商品详情请求地址
+        productDetail: `${host}/weapp/product/`
     }
 };
 
