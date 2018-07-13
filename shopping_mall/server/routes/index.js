@@ -12,6 +12,7 @@ const { auth: { authorizationMiddleware, validationMiddleware } } = require('../
 
 // --- 登录与授权 Demo --- //
 // 登录接口
+//authorizationMiddleWare 和 validationMiddleware帮助我们授权及验证登陆的状态的中间件
 router.get('/login', authorizationMiddleware, controllers.login)
 // 用户信息接口（可以用来验证登录态）
 router.get('/user', validationMiddleware, controllers.user)

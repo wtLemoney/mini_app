@@ -6,5 +6,5 @@ module.exports = async (ctx, next) => {
     if (ctx.state.$wxInfo.loginState) {
         ctx.state.data = ctx.state.$wxInfo.userinfo
         ctx.state.data['time'] = Math.floor(Date.now() / 1000)
-    }
+  }// 在授权登陆的情况下，我们将用户的数据、当前时间存储在返回数据中，返回给用户。
 }

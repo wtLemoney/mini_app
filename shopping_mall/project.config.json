@@ -25,13 +25,24 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
 					"name": "detail页面",
 					"pathName": "pages/detail/detail",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "user界面",
+					"pathName": "pages/user/user",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "order页面",
+					"pathName": "pages/order/order"
 				}
 			]
 		}
