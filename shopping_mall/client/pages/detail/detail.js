@@ -24,7 +24,7 @@ Page({
     })
 
     qcloud.request({
-      url: config.service.productDetail + id, //或者  config.service.productDetail
+      url: config.service.productDetail+id, //或者  config.service.productDetail
       
       success: result => {
         wx.hideLoading();
@@ -45,6 +45,49 @@ Page({
         setTimeout(() => {
           wx.navigateBack()
         }, 2000)
+      }
+    })
+  },
+
+  buy() {
+    wx.showLoading({
+      title: '商品购买中...',
+    })
+
+    let product = Object.assign({
+      count: 1
+    }, this.data.product)
+
+    qcloud.request({
+      url: config.service.addOrder,
+      login: true,
+      method: 'POST',
+      data: {
+        list: [product]
+      },
+      success: result => {
+        wx.hideLoading()
+
+        let data = result.data
+
+        if (!data.code) {
+          wx.showToast({
+            title: '商品购买成功',
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '商品购买失败',
+          })
+        }
+      },
+      fail: () => {
+        wx.hideLoading()
+
+        wx.showToast({
+          icon: 'none',
+          title: '商品购买失败',
+        })
       }
     })
   },

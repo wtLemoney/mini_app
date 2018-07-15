@@ -11,42 +11,7 @@ Page({
   data: {
     userInfo: null,
     locationAuthType: app.data.locationAuthType,
-    orderList: [
-      {
-        id: 0,
-        list: [{
-          count: 1,
-          image: 'https://product-1256969339.cos.ap-shanghai.myqcloud.com/product3.jpg',
-          name: '商品1',
-          price: 50.5,
-        }]
-      },
-      {
-        id: 1,
-        list: [{
-          count: 1,
-          image: 'https://product-1256969339.cos.ap-shanghai.myqcloud.com/product2.jpg',
-          name: '商品1',
-          price: 50.5,
-        },
-        {
-          count: 1,
-          image: 'https://product-1256969339.cos.ap-shanghai.myqcloud.com/product2.jpg',
-          name: '商品2',
-          price: 50.5,
-        }
-        ]
-      },
-      {
-        id: 2,
-        list: [{
-          count: 1,
-          image: 'https://product-1256969339.cos.ap-shanghai.myqcloud.com/product3.jpg',
-          name: '商品2',
-          price: 50.5,
-        }]
-      }
-    ], // 订单列表
+    orderList: [], // 订单列表
   },
 
   onTapLogin: function () {
@@ -63,13 +28,52 @@ Page({
         })
       }
     })
+
+    this.getOrder();
    },
 
+  getOrder() {
+    wx.showLoading({
+      title: '刷新订单数据...',
+    })
+
+    qcloud.request({
+      url: config.service.orderList,
+      login: true,
+      success: result => {
+        console.log("123");
+        wx.hideLoading()
+
+        let data = result.data
+        console.log(data)
+        if (!data.code) {
+          this.setData({
+            orderList: data.data
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: '刷新订单数据失败',
+          })
+        }
+      },
+      fail: () => {
+        wx.hideLoading()
+
+        wx.showToast({
+          icon: 'none',
+          title: '刷新订单数据失败',
+        })
+      }
+    })
+  },
+
+ 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
@@ -92,6 +96,9 @@ Page({
         this.setData({
           userInfo
         })
+
+        this.getOrder()
+        
       }
     })
   },

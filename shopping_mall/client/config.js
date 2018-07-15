@@ -27,7 +27,12 @@ var config = {
         //商品请求地址
         productList: `${host}/weapp/product`,
         //商品详情请求地址
-        productDetail: `${host}/weapp/product/`
+        productDetail: `${host}/weapp/product/`,
+        // 创建订单
+        addOrder: `${host}/weapp/order`,
+        // 获取已购买订单列表
+        orderList: `${host}/weapp/order`,
+
     }
 };
 
